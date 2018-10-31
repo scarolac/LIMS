@@ -26,8 +26,8 @@ class LibrarianMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(LibrarianMainMenu.this);
-                    LibrarianMainMenu.this.messageBox("Box Title", "2");
+                    getApplication().closeWindow(LibrarianMainMenu.this);
+                    new LibrarianRemoveMedia(getApplication());
                 }
             } );
         row += 2;
@@ -36,8 +36,8 @@ class LibrarianMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(LibrarianMainMenu.this);
-                    LibrarianMainMenu.this.messageBox("Box Title", "3");
+                    getApplication().closeWindow(LibrarianMainMenu.this);
+                    new LibrarianAddReader(getApplication());
                 }
             } );
         row += 2;
@@ -46,8 +46,8 @@ class LibrarianMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(LibrarianMainMenu.this);
-                    LibrarianMainMenu.this.messageBox("Box Title", "4");
+                    getApplication().closeWindow(LibrarianMainMenu.this);
+                    new LibrarianRemoveReader(getApplication());
                 }
             } );
         row += 2;
@@ -56,8 +56,8 @@ class LibrarianMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(LibrarianMainMenu.this);
-                    LibrarianMainMenu.this.messageBox("Box Title", "5");
+                    getApplication().closeWindow(LibrarianMainMenu.this);
+                    new LibrarianCheckoutReport(getApplication());
                 }
             } );
         row += 2;
@@ -66,8 +66,8 @@ class LibrarianMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(LibrarianMainMenu.this);
-                    LibrarianMainMenu.this.messageBox("Box Title", "6");
+                    getApplication().closeWindow(LibrarianMainMenu.this);
+                    new LibrarianFeeReport(getApplication());
                 }
             } );
         row += 2;
