@@ -1,10 +1,11 @@
-package views;
+
+import views.*;
 
 import jexer.*;
 
-class LIMSApp extends TApplication {
+public class App extends TApplication {
 
-    public LIMSApp() throws Exception {
+    public App() throws Exception {
         super(BackendType.SWING); // Use Swing Frames instead of terminal
 
         // Title for frame
@@ -16,7 +17,7 @@ class LIMSApp extends TApplication {
 
     public static void main(String [] args) {
         try {
-            LIMSApp app = new LIMSApp();
+            App app = new App();
             (new Thread(app)).start();
         } catch (Throwable t) {
             t.printStackTrace();

@@ -2,7 +2,7 @@ package views;
 
 import jexer.*;
         
-class LoginScreen extends ViewTemplate
+public class LoginScreen extends ViewTemplate
 {
     public LoginScreen(final TApplication application)
     {

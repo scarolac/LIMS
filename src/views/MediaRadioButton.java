@@ -6,7 +6,7 @@ import jexer.bits.GraphicsChars;
 import jexer.event.TKeypressEvent;
 import jexer.event.TMouseEvent;
 import static jexer.TKeypress.*;
-public class MediaRadioButton extends TRadioButton
+class MediaRadioButton extends TRadioButton
 {
     /**
      * Label for this radio button.
