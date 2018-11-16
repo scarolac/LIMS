@@ -59,13 +59,12 @@ class LibrarianAddMedia extends ViewTemplate
         row += 2;
 
         addLabel("Quantity:", col, row);
-        quantityField = addField(col + 10, row, 3, false, "");
+        quantityField =  null;//addField(col + 10, row, 3, false, "");
+        drawQuantity(col, row);
         row += 2;
 
-
-
-
-
+        // TODO: the functions need to track the location without changing
+        // global locations
 
 
 
@@ -113,5 +112,14 @@ class LibrarianAddMedia extends ViewTemplate
                     new LibrarianMainMenu(getApplication());
                 }
             } );
+
+        
     }
+
+    public void drawQuantity(int col, int row)
+    {
+        quantityField = addField(col + 10, row, 3, false, "");
+    }
+
+
 }
