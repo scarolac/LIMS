@@ -1,3 +1,5 @@
+package controllers;
+
 public abstract class ReportController
 {
     final void processReport()

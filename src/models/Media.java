@@ -1,19 +1,21 @@
-
-
+package models;
 import java.util.*;
 
-import Reader;
-
-public abstract class Media
+abstract public class Media
 {
     private String title;
-    private static int STOCKED;
     private String location;
     private boolean isCheckedOut;
     private Reader assignedTo;
-    private Date dueDate;
-    private int daysOverdue;
-    private LinkedList<Reader> waitlist;
+
+
+    public Media(String title, String location)
+    {
+        this.setTitle(title);
+        this.setLocation(location);
+        this.setCheckedOut(false);
+        this.setAssignedTo(null);
+    }
 
     /*******************************************
      * SETTERS
@@ -25,14 +27,6 @@ public abstract class Media
     public void setTitle(String title) 
     {
         this.title = title;
-    }
-
-    /**
-     * @param stocked the STOCKED to set
-     */
-    public static void setSTOCKED(int stocked) 
-    {
-        STOCKED = stocked;
     }
 
     /**
@@ -57,28 +51,7 @@ public abstract class Media
     {
         this.assignedTo = assignedTo;
     }
-    /**
-     * @param daysOverdue the daysOverdue to set
-     */
-    public void setDaysOverdue(int daysOverdue) 
-    {
-        this.daysOverdue = daysOverdue;
-    }
 
-    /**
-     * @param dueDate the dueDate to set
-     */
-    public void setDueDate(Date dueDate) 
-    {
-        this.dueDate = dueDate;
-    }
-    /**
-     * @param waitlist the waitlist to set
-     */
-    public void setWaitlist(LinkedList<Reader> waitlist) 
-    {
-        this.waitlist = waitlist;
-    }
 
     /*******************************************
      * GETTERS
@@ -90,13 +63,6 @@ public abstract class Media
     public String getTitle() 
     {
         return title;
-    }
-    /**
-     * @return the sTOCKED
-     */
-    public static int getSTOCKED() 
-    {
-        return STOCKED;
     }
 
     /**
@@ -115,8 +81,6 @@ public abstract class Media
         return isCheckedOut;
     }
 
-
-    // TODO: cant have numStocked and single reader
     /**
      * @return the assignedTo
      */
@@ -125,49 +89,20 @@ public abstract class Media
         return assignedTo;
     }
 
-    /**
-     * @return the dueDate
-     */
-    public Date getDueDate() 
-    {
-        return dueDate;
-    }
-
-    /**
-     * @return the daysOverdue
-     */
-    public int getDaysOverdue() 
-    {
-        return daysOverdue;
-    }
-
-    /**
-     * @return the waitlist
-     */
-    public LinkedList<Reader> getWaitlist() 
-    {
-        return waitlist;
-    }
 
     /*******************************************
      * MODIFIERS
      *******************************************/
-    public void addToWaitlist(Reader reader)
-    {
-        waitlist.add(reader);
-    }
-
     public void checkOut(Reader reader)
     {
-        // TODO: maybe in constructor
-        final DateFormat sdf = new SimpleDateFormat("d MMM yyyy");
-        // https://stackoverflow.com/questions/23307324/how-do-i-add-2-weeks-to-a-date-in-java
-
-
-        assignedTo = reader;
-        reader.checkOutMedia(this);
-        // TODO: remove stocked? maybe use a loop somewhere?
-        this.setSTOCKED(getSTOCKED() - 1);
-        dueDate = Date();
+        if (!this.isCheckedOut())
+        {
+            this.setAssignedTo(reader);
+            this.setCheckedOut(true);
+        }
+        else
+            System.out.println(this.getClass().getSimpleName() + 
+            " - item already checked out:" + 
+            this.isCheckedOut());
     }
 }

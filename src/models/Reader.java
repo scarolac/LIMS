@@ -1,5 +1,7 @@
 package models;
 
+import java.util.*;
+
 public class Reader
 {
     private String name;
@@ -21,7 +23,7 @@ public class Reader
     public Reader()
     {
         // should never be called
-        Reader("INVALID","CHECK@CODE.please");
+        this("INVALID","CHECK@CODE.please");
     }
 
     /*******************************************
@@ -134,6 +136,11 @@ public class Reader
      */
     public void checkOutMedia(Media media)
     {
-        this.checkedOut.add(media);
+        if(!media.isCheckedOut())
+        {    
+            this.checkedOut.add(media);
+        }
+        else
+            System.out.println(this.getClass().getSimpleName() + " - item not available");
     }
 }

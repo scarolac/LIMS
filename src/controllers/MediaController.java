@@ -1,4 +1,4 @@
-package lims.controllers;
+package controllers;
 
 public class MediaController
 {

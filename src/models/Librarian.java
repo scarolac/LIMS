@@ -13,7 +13,7 @@ public class Librarian
     }
     public Librarian()
     {
-        Librarian("INVALID", 0);
+        this("INVALID", 0);
     }
 
     /*******************************************
