@@ -93,16 +93,33 @@ abstract public class Media
     /*******************************************
      * MODIFIERS
      *******************************************/
-    public void checkOut(Reader reader)
+    public String checkOut(Reader reader)
     {
         if (!this.isCheckedOut())
         {
             this.setAssignedTo(reader);
             this.setCheckedOut(true);
+            return this.getTitle() + 
+                " checked out by " + 
+                reader.getName();
         }
         else
-            System.out.println(this.getClass().getSimpleName() + 
+            return this.getClass().getSimpleName() + 
             " - item already checked out:" + 
-            this.isCheckedOut());
+            this.isCheckedOut();
+    }
+
+    public String returnItem()
+    {
+        if (this.isCheckedOut())
+        {
+            this.setAssignedTo(null);
+            this.setCheckedOut(false);
+            return this.getTitle() + " returned";
+        }
+        else
+            return this.getClass().getSimpleName() + 
+            " - item not checked out";
+        
     }
 }

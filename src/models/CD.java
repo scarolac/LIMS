@@ -6,12 +6,20 @@ public class CD extends Media
     private int year;
     private String genre;
 
-    public CD(String title, String location, String artist, int year, String genre)
+    public CD(String title, String location, String artist, String year, String genre)
     {
         super(title,location);
         this.setArtist(artist);
-        this.setYear(year);
+        this.setYear(Integer.parseInt(year));
         this.setGenre(genre);
+    }
+
+    public CD(String title, String location)
+    {
+        super(title,location);
+        this.setArtist("");
+        this.setYear(0);
+        this.setGenre("");
     }
 
     /*******************************************

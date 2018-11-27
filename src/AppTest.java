@@ -1,6 +1,12 @@
 
 import models.*;
-public class AppTest
+import views.*;
+import controllers.*;
+
+import java.util.*;
+import jexer.*;
+
+public class AppTest extends TApplication
 {
 
     public static <T> void print(T s)
@@ -41,17 +47,78 @@ public class AppTest
 
     public static void testTwo()
     {
+        LibraryInformation lI = new LibraryInformation();
         Reader r = new Reader("Joe", "email");
-        LibraryInformation.grab().addReader(r);
-        print(LibraryInformation.grab().getReaders().get(0).getId());
-        LibraryInformation.grab().removeReader(1);
+        lI.addReader(r);
+        print(lI.getReaders().get(0).getId());
+        lI.removeReader(1);
+    }
+
+    public static void testThree()
+    {
+        Library lib = new Library("Norlin");
+        Library libBusiness = new Library("Business");
+        Library libEngineering = new Library("Engineering");
+        Library libLaw = new Library("Law");
+        Library libMusic = new Library("Music");
+
+        String args2[] = new String[] {"trees", "Norlin", "Me","ABC345","McGraw"};
+        print(Arrays.toString(args2));
+        print(lib.addMedia(new Book(args2[0], args2[1], args2[2], args2[3], args2[4])));
+        lib.addMedia(new Book("trees", "Norlin", "Me","ABC345","McGraw"));
+        lib.addMedia(new Book("trees", "Norlin", "Me","ABC345","McGraw"));
+        lib.addMedia(new Book("cats", "Norlin", "Me","ABC345","McGraw"));
+        lib.addMedia(new Book("trees", "Norlin", "Me","ABC345","McGraw"));
+
+
+        ArrayList<Media> temp = lib.searchMedia("trees", "Book");
+        // temp.asArray();
+        print(temp);
+    }
+
+    public AppTest() throws Exception {
+        super(BackendType.SWING); // Use Swing Frames instead of terminal
+
+        // Title for frame
+        getBackend().setTitle("LIMS");
+
+        // Start on "login" page
+        new LoginScreen(this);      
     }
 
     public static void main(String[] args) 
     {
-        testOne();
-        testTwo();
+        // testOne();
+        // testTwo();
+        // testThree();
         
+        try 
+        {
+            AppTest app = new AppTest();
+            
+
+            LibraryInformation libraryInformation = new LibraryInformation();
+            MediaController mc = new MediaController(libraryInformation, app);
+           
+
+
+
+            (new Thread(app)).start();
+
+
+
+
+
+
+
+        } 
+        catch (Throwable t) 
+        {
+            t.printStackTrace();
+        }
+        
+        
+
 
     }
 }

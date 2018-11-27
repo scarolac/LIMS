@@ -2,27 +2,17 @@ package models;
 
 import java.util.*;
 
-// This is a singleton because I wanted to see how it worked
-// not because it's a good idea.
 public class LibraryInformation
 {
-    private static LibraryInformation LibraryInformation;
     private ArrayList<Library> libraries;
     private ArrayList<Librarian> librarians;
     private ArrayList<Reader> readers;
 
-    private LibraryInformation()
+    public LibraryInformation()
     {
         this.setLibraries(new ArrayList<Library>());
         this.setLibrarians(new ArrayList<Librarian>());
         this.setReaders(new ArrayList<Reader>());
-    }
-    
-    public static LibraryInformation grab()
-    {
-        if (LibraryInformation == null)
-            LibraryInformation = new LibraryInformation();
-        return LibraryInformation;
     }
 
     /*******************************************
@@ -30,6 +20,7 @@ public class LibraryInformation
      *******************************************/
 
     /**
+     * Creates list of librarians to store "admins" or librarians
      * @param librarians the librarians to set
      */
     private void setLibrarians(ArrayList<Librarian> librarians) 
@@ -38,6 +29,7 @@ public class LibraryInformation
     }
 
     /**
+     * Creates libraries list to store the libraries
      * @param libraries the libraries to set
      */
     private void setLibraries(ArrayList<Library> libraries) 
@@ -46,6 +38,7 @@ public class LibraryInformation
     }
 
     /**
+     * Creates readers list to store readers into
      * @param readers the readers to set
      */
     private void setReaders(ArrayList<Reader> readers) 
@@ -95,5 +88,41 @@ public class LibraryInformation
     public void removeReader(int id)
     {
         readers.removeIf(reader -> (reader.getId() == id && reader.getCheckedOut() == null));
+    }
+
+    public ArrayList<Reader> findReader(String name)
+    {
+        ArrayList<Reader> searchList= new ArrayList<Reader>();
+        for (Reader r : this.readers)
+            if (r.getName().equals(name))
+                searchList.add(r);
+        return searchList; 
+    }
+
+    public void addMedia(Media media, String name)
+    {
+        for (Library l : libraries)
+            if (l.getName().equals(name))
+                l.addMedia(media);
+    }
+
+    /* 
+        These functions are not used by the App, only used to build the class
+    */
+    /**
+     * Add library to track
+     * @param library
+     */
+    public void addLibrary(Library library)
+    {
+        libraries.add(library);
+    }
+    /**
+     * Add librarians to system
+     * @param librarian
+     */
+    public void addLibrarian(Librarian librarian)
+    {
+        librarians.add(librarian);
     }
 }

@@ -57,18 +57,24 @@ public class Library
         this.inventory.add(media);
         return "Added " + 
             media.getClass().getSimpleName() + 
+            " -> " +
             media.getTitle() + 
             " to library " + 
             this.getName();
     }
 
-    public void removeMedia()
+    public void removeMedia(Media media)
     {
-
+        if (!media.isCheckedOut())
+            this.inventory.remove(media);
     }
 
-    public ArrayList<Media> searchMedia(String title)
+    public ArrayList<Media> searchMedia(String title, String type)
     {
-        return null;
+        ArrayList<Media> searchList= new ArrayList<Media>();
+        for (Media m : this.inventory)
+            if (m.getTitle().equals(title) && m.getClass().getSimpleName().equals(type))
+                searchList.add(m);
+        return searchList;
     }
 }

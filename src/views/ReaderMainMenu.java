@@ -15,8 +15,8 @@ class ReaderMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(ReaderMainMenu.this);
-                    ReaderMainMenu.this.messageBox("Box Title", "1");
+                    getApplication().closeWindow(ReaderMainMenu.this);
+                    new ReaderSelfCheckout(getApplication());
                 }
             } );
         row += 2;
@@ -26,8 +26,8 @@ class ReaderMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(ReaderMainMenu.this);
-                    ReaderMainMenu.this.messageBox("Box Title", "2");
+                    getApplication().closeWindow(ReaderMainMenu.this);
+                    new ReaderCheckoutReport(getApplication());
                 }
             } );
         row += 2;
@@ -36,18 +36,18 @@ class ReaderMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(ReaderMainMenu.this);
-                    ReaderMainMenu.this.messageBox("Box Title", "3");
+                    getApplication().closeWindow(ReaderMainMenu.this);
+                    new ReaderFeeReport(getApplication());
                 }
             } );
         row += 2;
-        addButton("&4 Search/Waitlist item", 5, row, 
+        addButton("&4 Search item", 5, row, 
             new TAction() 
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(ReaderMainMenu.this);
-                    ReaderMainMenu.this.messageBox("Box Title", "4");
+                    getApplication().closeWindow(ReaderMainMenu.this);
+                    new ReaderSearchMedia(getApplication());
                 }
             } );
 

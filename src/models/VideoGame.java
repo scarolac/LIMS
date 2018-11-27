@@ -11,6 +11,14 @@ public class VideoGame extends Media
         this.setConsole(console);
         this.setDeveloper(developer);
     }
+
+    public VideoGame(String title, String location)
+    {
+        super(title,location);
+        this.setConsole("");
+        this.setDeveloper("");
+    }
+
     /*******************************************
      * SETTERS
      *******************************************/

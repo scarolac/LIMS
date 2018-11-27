@@ -14,6 +14,14 @@ public class Book extends Media
         this.setPublisher(publisher);
     }
 
+    public Book(String title, String location)
+    {
+        super(title,location);
+        this.setAuthor("");
+        this.setIsbn("");
+        this.setPublisher("");
+    }
+
     /*******************************************
      * SETTERS
      *******************************************/

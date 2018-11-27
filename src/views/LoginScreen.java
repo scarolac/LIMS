@@ -29,6 +29,17 @@ public class LoginScreen extends ViewTemplate
                     new ReaderMainMenu(getApplication());
                 }
             } );
+
+        addButton("&Return item",getWidth() / 2, getHeight() - 4,
+            new TAction()
+            {
+                public void DO()
+                {
+                    LoginScreen.this.messageBox("Return Item", "Somehow this will return stuff");
+                }
+
+            }
+        );
         // addButton("&Close Window", (getWidth() - 14) / 2, getHeight() - 4,
         //     new TAction() {
         //         public void DO() {

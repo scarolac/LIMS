@@ -7,29 +7,37 @@ import java.util.List;
 
 class LibrarianAddMedia extends ViewTemplate
 {
-    TComboBox libraryBox = null;
+    int row;
+    int col;
 
-    TRadioGroup mediaTypes = null;
+    ArrayList<String> attributes = new ArrayList<String>();
+
+    TComboBox libraryBox = null;
+    TComboBox mediaBox = null;
 
     TField titleField = null;
     TField quantityField = null;
 
-    MediaRadioButton bookRadio = null;
-    MediaRadioButton dvdRadio = null;
-    MediaRadioButton cdRadio = null;
-    MediaRadioButton videoGameRadio = null;
+    TLabel attributeOne = null;
+    TLabel attributeTwo = null;
+    TLabel attributeThree = null;
+
+    TField attributeOneField = null;
+    TField attributeTwoField = null;
+    TField attributeThreeField = null;
 
     public LibrarianAddMedia(final TApplication application)
     {
         super(application, "Add Media");
 
-        int row = 3;
-        int col = 5;
+        row = 3;
+        col = 5;
 
         // Library selection
         addLabel("Select Library:", col, row);
 
         // TODO: Controller should add this probably from LibraryInformation class
+        //foreach loop through libraryinformation list
         List<String> libraries = new ArrayList<String>();
         libraries.add("Business");
         libraries.add("Engineering");
@@ -42,16 +50,12 @@ class LibrarianAddMedia extends ViewTemplate
         // Type selection on same row but to the right
         // TODO: fix better
         addLabel("Select Type:", getWidth() / 2, row);
-        mediaTypes = addRadioGroup((getWidth() / 2) + 12, row - 1, "Media");
-        bookRadio = new MediaRadioButton(mediaTypes,1,mediaTypes.getChildren().size() + 1,
-                "Book",mediaTypes.getChildren().size()+1);
-        dvdRadio = new MediaRadioButton(mediaTypes,1,mediaTypes.getChildren().size() + 1,
-                "DVD",mediaTypes.getChildren().size()+1);
-        cdRadio = new MediaRadioButton(mediaTypes,1,mediaTypes.getChildren().size() + 1,
-                "CD",mediaTypes.getChildren().size()+1);
-        videoGameRadio = new MediaRadioButton(mediaTypes,1,mediaTypes.getChildren().size() + 1,
-                "Video Game",mediaTypes.getChildren().size()+1);
-        
+        List<String> types = new ArrayList<String>();
+        types.add("Book");
+        types.add("DVD");
+        types.add("CD");
+        types.add("VideoGame");
+        mediaBox = addComboBox((getWidth() / 2) + 13, row, 12, types, 0, 5, drawBottomHalf());     
         row += 4;
 
         addLabel("Title:", col, row);
@@ -59,46 +63,56 @@ class LibrarianAddMedia extends ViewTemplate
         row += 2;
 
         addLabel("Quantity:", col, row);
-        quantityField =  null;//addField(col + 10, row, 3, false, "");
-        drawQuantity(col, row);
+        // quantityField = addField(col + 10, row, 3, false, "");
+        drawQuantity();
         row += 2;
 
         // TODO: the functions need to track the location without changing
         // global locations
 
+        attributeOne = addLabel("Console:", col, row);
+        attributeOne.setLabel("Author:");
+        attributeOneField = addField(col + 8, row, 30, false, "");
+        row += 2;
 
+        attributeTwo = addLabel("Developer:", col, row);
+        attributeTwo.setLabel("ISBN:");
+        attributeTwoField = addField(20, row, 30, false, "");
+        attributeTwoField.setX(6 + attributeTwo.getLabel().length());
 
+        row += 2;
 
-
-
-
-
+        attributeThree = addLabel("Publisher:", col, row);
+        attributeThreeField = addField(col + 11, row, 30, false, "");
+        row += 2;
 
         addButton("&Test",getWidth() / 2, getHeight() - 4,
             new TAction()
             {
                 public void DO()
                 {
-                    // ugly
-                    int output = mediaTypes.getSelected();
-                    String label = "";
-                    if (output == 1) label = "Book";
-                    if (output == 2) label = "DVD";
-                    if (output == 3) label = "CD";
-                    if (output == 4) label = "Video Game";
+                    String type = mediaBox.getText();
+                    int amount = Integer.parseInt(quantityField.getText());
+                    attributes.add(titleField.getText());
+                    attributes.add(libraryBox.getText());
+                    attributes.add(attributeOneField.getText());
+                    attributes.add(attributeTwoField.getText());
+                    attributes.add(attributeThreeField.getText());
 
+                    String temp = "";
+                    for (String i : attributes)
+                        temp += i + "\n";
 
+                    
                     getApplication().messageBox("Testing",
-                    "Library: " + libraryBox.getText() + 
-                    "\n" + 
-                    "Type: " + label + 
-                    "\n" + 
-                    "Title: " + titleField.getText() +
-                    "\n"+
-                    cdRadio.getLabel() +
-                    "\n" + 
-                    "quantityField: " + quantityField.getText(),
+                    "Type: " + type 
+                    + "\n" + 
+                    "Amount: " + amount 
+                    + "\n" +
+                    temp,
                     TMessageBox.Type.OK);
+
+                    attributes = new ArrayList<String>();
                 }
             }
         );
@@ -116,9 +130,69 @@ class LibrarianAddMedia extends ViewTemplate
         
     }
 
-    public void drawQuantity(int col, int row)
+    public void drawQuantity()
     {
         quantityField = addField(col + 10, row, 3, false, "");
+    }
+
+    private TAction drawBottomHalf()
+    {
+        return new TAction()
+        {
+            public void DO()
+            {
+                if (mediaBox.getText().equals("Book"))
+                {
+                    attributeOne.setLabel("Author:");                    
+                    attributeTwo.setLabel("ISBN:");
+                    attributeThree.setLabel("Publisher:");
+                    if(!attributeThreeField.isVisible() || !attributeThree.isVisible())
+                    {
+                        attributeThree.setVisible(true);
+                        attributeThreeField.setVisible(true);
+                    }
+
+                }
+
+                if (mediaBox.getText().equals("DVD"))
+                {
+                    attributeOne.setLabel("Year:");                    
+                    attributeTwo.setLabel("Genre:");
+
+                    attributeThree.setVisible(false);
+                    attributeThreeField.setText("");
+                    attributeThreeField.setVisible(false);                    
+                }
+
+                if (mediaBox.getText().equals("CD"))
+                {
+                    attributeOne.setLabel("Artist:");                    
+                    attributeTwo.setLabel("Year:");
+                    attributeThree.setLabel("Genre:");
+                    if(!attributeThreeField.isVisible() || !attributeThree.isVisible())
+                    {
+                        attributeThree.setVisible(true);
+                        attributeThreeField.setVisible(true);
+                    }
+                        
+                }
+
+                if (mediaBox.getText().equals("VideoGame"))
+                {
+                    attributeOne.setLabel("Console:");                    
+                    attributeTwo.setLabel("Developer:");
+
+                    attributeThree.setVisible(false);
+                    attributeThreeField.setText("");
+                    attributeThreeField.setVisible(false);   
+                }
+
+                attributeOneField.setX(6 + attributeOne.getLabel().length());
+                attributeTwoField.setX(6 + attributeTwo.getLabel().length());
+                attributeThreeField.setX(6 + attributeThree.getLabel().length());
+            }
+            
+        };
     }
 
 

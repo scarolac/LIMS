@@ -16,8 +16,8 @@ public class Reader
         this.setName(name);
         this.setEmail(email);
         this.setId(); // TODO: No destructor, put in info class?
-        this.setCheckedOut();
-        this.setFees();
+        this.setCheckedOut(new ArrayList<Media>());
+        this.setFees(0.0);
     }
     
     public Reader()
@@ -33,25 +33,25 @@ public class Reader
     /**
      * @param name the name to set
      */
-    public void setName(String name) 
+    private void setName(String name) 
     {
         this.name = name;
     }
 
     /**
-     * @param checkedOut initialize the arraylist of Media
+     * @param checkedOut the checkedOut to set
      */
-    public void setCheckedOut() 
+    private void setCheckedOut(ArrayList<Media> checkedOut) 
     {
-        this.checkedOut = new ArrayList<Media>();
+        this.checkedOut = checkedOut;
     }
 
     /**
-     * @param fees initialize fees to 0 on new reader
+     * @param fees the fees to set
      */
-    public void setFees() 
+    public void setFees(double fees) 
     {
-        this.fees = 0.0;
+        this.fees = fees;
     }
 
     /**
@@ -76,14 +76,14 @@ public class Reader
 
 
     /**
-     * @return the name
+     * @return the readers name
      */
     public String getName() {
         return name;
     }
     
     /**
-     * @return the checkedOut media
+     * @return the list of checked out media objects
      */
     public ArrayList<Media> getCheckedOut() {
         return checkedOut;

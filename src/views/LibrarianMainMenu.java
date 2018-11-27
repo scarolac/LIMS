@@ -76,8 +76,8 @@ class LibrarianMainMenu extends ViewTemplate
             {
                 public void DO() 
                 {
-                    // getApplication().closeWindow(LibrarianMainMenu.this);
-                    LibrarianMainMenu.this.messageBox("Box Title", "7");
+                    getApplication().closeWindow(LibrarianMainMenu.this);
+                    new LibrarianCheckoutMedia(getApplication());
                 }
             } );
         row += 2;

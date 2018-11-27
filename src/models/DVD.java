@@ -5,11 +5,18 @@ public class DVD extends Media
     private int year;
     private String genre;
 
-    public DVD(String title, String location, int year, String genre)
+    public DVD(String title, String location, String year, String genre)
     {
         super(title,location);
-        this.setYear(year);
+        this.setYear(Integer.parseInt(year));
         this.setGenre(genre);
+    }
+
+    public DVD(String title, String location)
+    {
+        super(title,location);
+        this.setYear(0);
+        this.setGenre("");
     }
 
     /*******************************************
