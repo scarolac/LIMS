@@ -14,4 +14,10 @@ https://github.com/klamonte/jexer is the library used for the GUI
     to clean up the .class files:
     rm -rf *.class views/*.class models/*.class controllers/*.class
 
-Working on getting maven set up to manage the package, but I don't know it well enough to deal with the outside library that needs to be inside the jar file.
+Features:
+
+    Add/remove media to library system
+    Add/remove readers
+    View checked out media
+    View fees by readers
+    Checkout media for a reader
