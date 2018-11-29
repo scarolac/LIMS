@@ -47,7 +47,7 @@ public class AppTest extends TApplication
 
     public static void testTwo()
     {
-        LibraryInformation lI = new LibraryInformation();
+        LibraryInformation lI = LibraryInformation.getInstance();
         Reader r = new Reader("Joe", "email");
         lI.addReader(r);
         print(lI.getReaders().get(0).getId());
@@ -95,15 +95,31 @@ public class AppTest extends TApplication
         try 
         {
             AppTest app = new AppTest();
-            
-
-            LibraryInformation libraryInformation = new LibraryInformation();
-            MediaController mc = new MediaController(libraryInformation, app);
-           
-
-
-
             (new Thread(app)).start();
+
+            LibraryInformation libraryInformation = LibraryInformation.getInstance();
+            
+            Library libNorlin = new Library("Norlin");
+            Library libBusiness = new Library("Business");
+            Library libEngineering = new Library("Engineering");
+            Library libLaw = new Library("Law");
+            Library libMusic = new Library("Music");
+            libraryInformation.addLibrary(libNorlin);
+            libraryInformation.addLibrary(libBusiness);
+            libraryInformation.addLibrary(libEngineering);
+            libraryInformation.addLibrary(libLaw);
+            libraryInformation.addLibrary(libMusic);
+            libNorlin.addMedia(new Book("trees", "Norlin", "Me","ABC345","McGraw"));
+            Media m1 = new Book("trees", "Engineering", "Me","ABC345","McGraw");
+            libEngineering.addMedia(m1);
+        
+
+            Reader r1 = new Reader("Chris Scarola", "scarolac@colorado.edu");
+            r1.setFees(23.13);
+            // r1.checkOutMedia(m1);
+            // m1.checkOut(r1);
+            libraryInformation.addReader(r1);
+            
 
 
 

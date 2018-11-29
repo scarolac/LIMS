@@ -6,20 +6,20 @@ public class CD extends Media
     private int year;
     private String genre;
 
+    /**
+     * Create CD instance
+     * @param title of album
+     * @param location - which library 
+     * @param artist of album
+     * @param year of release
+     * @param genre of music
+     */
     public CD(String title, String location, String artist, String year, String genre)
     {
         super(title,location);
         this.setArtist(artist);
         this.setYear(Integer.parseInt(year));
         this.setGenre(genre);
-    }
-
-    public CD(String title, String location)
-    {
-        super(title,location);
-        this.setArtist("");
-        this.setYear(0);
-        this.setGenre("");
     }
 
     /*******************************************
@@ -71,5 +71,13 @@ public class CD extends Media
     public String getGenre() 
     {
         return genre;
+    }
+
+    @Override
+    public String toString() 
+    {
+        return getClass().getSimpleName() + ": " + getTitle() + 
+        ", artist: " + getArtist() +
+        ", library: " + getLocation();
     }
 }

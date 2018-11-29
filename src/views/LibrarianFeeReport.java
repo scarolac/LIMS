@@ -1,9 +1,14 @@
 package views;
 
+import controllers.*;
+import models.*;
 import jexer.*;
 
 class LibrarianFeeReport extends ViewTemplate
 {
+    LibraryInformation li = LibraryInformation.getInstance();
+    ReportController rc = new FeeReport(li);
+
     private TText reportField = null;
 
     public LibrarianFeeReport(final TApplication application)
@@ -13,19 +18,11 @@ class LibrarianFeeReport extends ViewTemplate
         int row = 3;
         int col = 5;
 
-        reportField = addText("This should load automatically", col, row, 57, 13);
+        reportField = addText(rc.processReport(), col, row, 57, 13);
 
-        addButton("&Test",getWidth() / 2, getHeight() - 4,
-            new TAction()
-            {
-                public void DO()
-                {
-                    reportField = addText(testString(), col, row, 57, 13);
-                }
-            }
-        );
 
-        addButton("&Cancel", getWidth()-14, getHeight() - 4, 
+        // return to previous menu
+        addButton("&Return", getWidth()-14, getHeight() - 4, 
             new TAction() 
             {
                 public void DO() 
@@ -34,14 +31,5 @@ class LibrarianFeeReport extends ViewTemplate
                     new LibrarianMainMenu(getApplication());
                 }
             } );
-    }
-
-    public String testString()
-    {
-        String temp;
-        temp = "Reader\tFees\n";
-        temp += "-------------------------------------------------------\n";
-        temp += "Jim\t$17284.54\n";
-        return temp;
     }
 }

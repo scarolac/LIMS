@@ -2,8 +2,14 @@ package views;
 
 import jexer.*;
 
+import models.*;
+import controllers.*;
+
 class ReaderCheckoutReport extends ViewTemplate
 {
+
+    LibraryInformation li = LibraryInformation.getInstance();
+
     private TText reportField = null;
 
     public ReaderCheckoutReport(final TApplication application)
@@ -13,19 +19,14 @@ class ReaderCheckoutReport extends ViewTemplate
         int row = 3;
         int col = 5;
 
-        reportField = addText("This should load automatically", col, row, 57, 13);
+        Reader r = li.findReader(1);
+        String media = "";
+        if (r.getCheckedOut().size() == 0) media += "Nothing checked out";
+        for (Media m : r.getCheckedOut())
+            media += m.toString() + "\n";
+        reportField = addText(media, col, row, 57, 13);
 
-        addButton("&Test",getWidth() / 2, getHeight() - 4,
-            new TAction()
-            {
-                public void DO()
-                {
-                    reportField = addText(testString(), col, row, 57, 13);
-                }
-            }
-        );
-
-        addButton("&Cancel", getWidth()-14, getHeight() - 4, 
+        addButton("&Return", getWidth()-14, getHeight() - 4, 
             new TAction() 
             {
                 public void DO() 
@@ -34,14 +35,5 @@ class ReaderCheckoutReport extends ViewTemplate
                     new ReaderMainMenu(getApplication());
                 }
             } );
-    }
-
-    public String testString()
-    {
-        String temp;
-        temp = "Library\tTitle (type)\tReader\tDue Date\n";
-        temp += "-------------------------------------------------------\n";
-        temp += "Norlin\tBook About Birds\tJim\t11/12/2018\n";
-        return temp;
     }
 }

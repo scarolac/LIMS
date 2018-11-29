@@ -1,12 +1,24 @@
 package controllers;
 
+import models.*;
+
 public abstract class ReportController
 {
-    final void processReport()
+    LibraryInformation libraryInformation;
+    public ReportController(LibraryInformation libraryInformation)
+    {
+        this.libraryInformation = libraryInformation;
+    }
+
+    /**
+     * Template method to make reports
+     * @return the string to print
+     */
+    public final String  processReport()
     {
         loadData();
         formatData();
-        displayData();
+        return displayData();
     }
 
     abstract void loadData();
@@ -14,28 +26,6 @@ public abstract class ReportController
 
     public String displayData()
     {
-        return "";
-    }
-}
-
-class FeeReport extends ReportController
-{
-    public void loadData()
-    {   }
-
-    public String formatData()
-    {
-        return "error?";
-    }
-}
-
-class CheckoutReport extends ReportController
-{
-    public void loadData()
-    {   }
-
-    public String formatData()
-    {
-        return "a different string";
+        return formatData();
     }
 }

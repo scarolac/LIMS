@@ -11,19 +11,18 @@ public class Reader
     private String email;
     private double fees;
 
+    /**
+     * Create Reader instance, these are the ones who check out books, people
+     * @param name of person
+     * @param email or person to contact
+     */
     public Reader(String name, String email)
     {
         this.setName(name);
         this.setEmail(email);
-        this.setId(); // TODO: No destructor, put in info class?
+        this.setId(); 
         this.setCheckedOut(new ArrayList<Media>());
         this.setFees(0.0);
-    }
-    
-    public Reader()
-    {
-        // should never be called
-        this("INVALID","CHECK@CODE.please");
     }
 
     /*******************************************
@@ -122,6 +121,11 @@ public class Reader
      * MODIFIERS
      *******************************************/
 
+    @Override
+    public String toString() 
+    {
+        return "ID: " + getId() + " - " + getName() + ": " + getEmail();
+    }
     /**
      * @param fee The amount to add to existing fees
     */
@@ -142,5 +146,13 @@ public class Reader
         }
         else
             System.out.println(this.getClass().getSimpleName() + " - item not available");
+    }
+
+    /**
+     * Resets the checkout list, "returns" the items, called after the items are actually put back
+     */
+    public void returnItems()
+    {
+        this.checkedOut = new ArrayList<Media>();
     }
 }

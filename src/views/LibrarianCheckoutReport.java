@@ -1,9 +1,14 @@
 package views;
 
+import controllers.*;
+import models.*;
 import jexer.*;
 
 class LibrarianCheckoutReport extends ViewTemplate
 {
+    LibraryInformation li = LibraryInformation.getInstance();
+    ReportController rc = new CheckoutReport(li);
+
     private TText reportField = null;
 
     public LibrarianCheckoutReport(final TApplication application)
@@ -13,19 +18,9 @@ class LibrarianCheckoutReport extends ViewTemplate
         int row = 3;
         int col = 5;
 
-        reportField = addText("This should load automatically", col, row, 57, 13);
+        reportField = addText(rc.processReport(), col, row, 57, 13);
 
-        addButton("&Test",getWidth() / 2, getHeight() - 4,
-            new TAction()
-            {
-                public void DO()
-                {
-                    reportField = addText(testString(), col, row, 57, 13);
-                }
-            }
-        );
-
-        addButton("&Cancel", getWidth()-14, getHeight() - 4, 
+        addButton("&Return", getWidth()-14, getHeight() - 4, 
             new TAction() 
             {
                 public void DO() 
@@ -34,14 +29,5 @@ class LibrarianCheckoutReport extends ViewTemplate
                     new LibrarianMainMenu(getApplication());
                 }
             } );
-    }
-
-    public String testString()
-    {
-        String temp;
-        temp = "Library\tTitle (type)\tReader\tDue Date\n";
-        temp += "-------------------------------------------------------\n";
-        temp += "Norlin\tBook About Birds\tJim\t11/12/2018\n";
-        return temp;
     }
 }

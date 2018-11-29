@@ -1,4 +1,5 @@
 package models;
+
 import java.util.*;
 
 abstract public class Media
@@ -122,4 +123,6 @@ abstract public class Media
             " - item not checked out";
         
     }
+
+    public abstract String toString();
 }

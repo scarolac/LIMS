@@ -21,7 +21,7 @@ class ReaderMainMenu extends ViewTemplate
             } );
         row += 2;
 
-        addButton("&2 Check overdue Fees", 5, row, 
+        addButton("&2 View Checked out media", 5, row, 
             new TAction() 
             {
                 public void DO() 
@@ -31,23 +31,13 @@ class ReaderMainMenu extends ViewTemplate
                 }
             } );
         row += 2;
-        addButton("&3 View Checked out media", 5, row, 
+        addButton("&3 Check overdue Fees", 5, row, 
             new TAction() 
             {
                 public void DO() 
                 {
                     getApplication().closeWindow(ReaderMainMenu.this);
                     new ReaderFeeReport(getApplication());
-                }
-            } );
-        row += 2;
-        addButton("&4 Search item", 5, row, 
-            new TAction() 
-            {
-                public void DO() 
-                {
-                    getApplication().closeWindow(ReaderMainMenu.this);
-                    new ReaderSearchMedia(getApplication());
                 }
             } );
 

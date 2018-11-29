@@ -6,20 +6,20 @@ public class Book extends Media
     private String isbn;
     private String publisher;
 
+    /**
+     * Create Book instace of abstract media
+     * @param title of book
+     * @param location - which library is it stored in
+     * @param author of book
+     * @param isbn of book
+     * @param publisher of book
+     */
     public Book(String title, String location, String author, String isbn, String publisher)
     {
         super(title,location);
         this.setAuthor(author);
         this.setIsbn(isbn);
         this.setPublisher(publisher);
-    }
-
-    public Book(String title, String location)
-    {
-        super(title,location);
-        this.setAuthor("");
-        this.setIsbn("");
-        this.setPublisher("");
     }
 
     /*******************************************
@@ -74,5 +74,13 @@ public class Book extends Media
     public String getPublisher() 
     {
         return publisher;
+    }
+
+    @Override
+    public String toString() 
+    {
+        return getClass().getSimpleName() + ": " + getTitle() + 
+            ", author: " + getAuthor() +
+            ", library: " + getLocation();
     }
 }

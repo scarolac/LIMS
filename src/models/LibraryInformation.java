@@ -2,17 +2,28 @@ package models;
 
 import java.util.*;
 
+/**
+ * Singleton, because it is easier than passing it through to each view
+ */
 public class LibraryInformation
 {
+    private static LibraryInformation li;
     private ArrayList<Library> libraries;
     private ArrayList<Librarian> librarians;
     private ArrayList<Reader> readers;
 
-    public LibraryInformation()
+    private LibraryInformation()
     {
         this.setLibraries(new ArrayList<Library>());
         this.setLibrarians(new ArrayList<Librarian>());
         this.setReaders(new ArrayList<Reader>());
+    }
+
+    public static LibraryInformation getInstance()
+    {
+        if(li == null)
+            li = new LibraryInformation();
+        return li;
     }
 
     /*******************************************
@@ -85,16 +96,24 @@ public class LibraryInformation
      * Remove reader based on id, does nothing if not found
      * @param id the id of the reader to be removed
      */
-    public void removeReader(int id)
+    public boolean removeReader(int id)
     {
-        readers.removeIf(reader -> (reader.getId() == id && reader.getCheckedOut() == null));
+        return readers.removeIf(reader -> (reader.getId() == id && reader.getCheckedOut().size() == 0));
     }
 
-    public ArrayList<Reader> findReader(String name)
+    public Reader findReader(int id)
+    {
+        for (Reader r : this.readers)
+            if (r.getId() == id)
+                 return r;
+        return null; 
+    }
+    
+    public ArrayList<Reader> findReader(String email)
     {
         ArrayList<Reader> searchList= new ArrayList<Reader>();
         for (Reader r : this.readers)
-            if (r.getName().equals(name))
+            if (r.getEmail().equals(email))
                 searchList.add(r);
         return searchList; 
     }
